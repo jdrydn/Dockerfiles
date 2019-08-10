@@ -1,8 +1,7 @@
-# @author: James D <james@jdrydn.com> (https://jdrydn.com)
-# @license: MIT
-# @link: https://github.com/jdrydn/Dockerfiles/tree/master/mysqldump-to-s3
-# @link: https://github.com/schickling/dockerfiles/blob/master/mysql-backup-s3/Dockerfile
+# https://github.com/jdrydn/Dockerfiles/tree/master/mysqldump-to-s3
+# https://github.com/schickling/dockerfiles/blob/master/mysql-backup-s3/Dockerfile
 FROM alpine:latest
+MAINTAINER jdrydn <james@jdrydn.com> (https://jdrydn.com)
 
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh

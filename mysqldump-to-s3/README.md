@@ -8,14 +8,13 @@
 
 ```sh
 $ docker pull jdrydn/mysqldump-to-s3:latest
-$ cat << EOF >> backup.env
-MYSQL_HOST=project.3927e3a82872.us-east-1.rds.amazonaws.com
-MYSQL_USER=root
-MYSQL_PASSWORD=password
-MYSQL_DATABASE=PROJECT
-S3_BUCKET=project-backups
-EOF
-$ docker run --rm --env-file ./backup.env jdrydn/mysqldump-to-s3:latest
+$ docker run \
+  -e S3_BUCKET=project-backups \
+  -e MYSQL_HOST=project.3927e3a82872.us-east-1.rds.amazonaws.com \
+  -e MYSQL_USER=root \
+  -e MYSQL_PASSWORD=password \
+  -e MYSQL_DATABASE=PROJECT \
+  jdrydn/mysqldump-to-s3:latest
 ACTION: Creating individual dump of PROJECT from project.3927e3a82872.us-east-1.rds.amazonaws.com to s3://project-backups/20190810T050709Z.PROJECT.sql.gz
 SUCCESS!
 ```
