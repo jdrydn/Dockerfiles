@@ -21,11 +21,11 @@ if [ "${S3_FILENAME}" == "" ]; then
 fi
 
 MYSQL_OPTS="-h ${MYSQL_HOST} -P ${MYSQL_PORT} -u${MYSQL_USER}"
-if [ "${MYSQL_PASSWORD}" == "" ]; then
+if [ "${MYSQL_PASSWORD}" != "" ]; then
   MYSQL_OPTS="${MYSQL_OPTS} -p${MYSQL_PASSWORD}"
 fi
 
-if [ "${MYSQL_DATABASE}" == "**NONE**" ]; then
+if [ "${MYSQL_DATABASE}" == "" ]; then
   MYSQL_DATABASE=`mysql $MYSQL_OPTS -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema|performance_schema|mysql|sys|innodb)"`
   throw_err "$?" "Failed to list databases"
 else
