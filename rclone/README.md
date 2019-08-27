@@ -7,7 +7,7 @@
 ```sh
 $ docker pull jdrydn/rclone:latest
 $ docker run --rm jdrydn/rclone:latest \
-  --config rclone.conf sync one:// two://
+  rclone --config rclone.conf sync one:// two://
 ```
 
 ## Configuration
@@ -17,22 +17,58 @@ Pass a preconfigured `rclone.conf` file to this container and execute your rclon
 - Mount a volume to the container during runtime:
 
 ```sh
-$ docker run --rm -v rclone.conf:rclone.conf:ro jdrydn/rclone:latest \
-  --config rclone.conf sync one:// two://
+$ docker run --rm \
+  -v rclone.conf:rclone.conf:ro \
+  jdrydn/rclone:latest \
+  rclone --config rclone.conf sync one:// two://
 ```
 
 - Use this image as the basis for your own, where you can copy your config file into the image, like so:
 
 ```dockerfile
 FROM jdrydn/rclone:latest
-COPY rclone.conf .
+COPY rclone.conf /root/.config/rclone/rclone.conf
+```
+```sh
+$ docker build -t my/rclone:latest .
+$ docker run --rm my/rclone:latest rclone sync one:// two://
 ```
 
-- Finally, since this was designed to run on AWS, you can provide an `S3_CONFIG` environment variable as an S3 path to your config file, which will be fetched at runtime:
+- Finally, [rclone can be configured entirely using environment variables](https://rclone.org/docs/#environment-variables), like these examples:
 
 ```sh
-$ docker run --rm -e S3_CONFIG=s3://secure-bucket/rclone.conf jdrydn/rclone:latest \
-  --config rclone.conf sync one:// two://
+$ docker run --rm \
+  -e RCLONE_CONFIG_ONE_TYPE=s3 \
+  -e RCLONE_CONFIG_ONE_ENV_AUTH=true \
+  -e RCLONE_CONFIG_ONE_ACL=private \
+  -e RCLONE_CONFIG_TWO_TYPE=b2 \
+  -e RCLONE_CONFIG_TWO_ACCOUNT=ABC \
+  -e RCLONE_CONFIG_TWO_KEY=XYZ \
+  -e RCLONE_CONFIG_TWO_HARD_DELETE=true \
+  jdrydn/rclone:latest rclone sync one:// two://
+```
+```sh
+$ cat << EOF >> rclone.env
+RCLONE_CONFIG_ONE_TYPE = s3
+RCLONE_CONFIG_ONE_ENV_AUTH = true
+RCLONE_CONFIG_ONE_ACL = private
+RCLONE_CONFIG_TWO_TYPE = b2
+RCLONE_CONFIG_TWO_ACCOUNT = ABC
+RCLONE_CONFIG_TWO_KEY = XYZ
+RCLONE_CONFIG_TWO_HARD_DELETE = true
+EOF
+$ docker run --rm --env-file rclone.env \
+  jdrydn/rclone:latest rclone sync one:// two://
+```
+
+## Development
+
+```sh
+$ docker build -t jdrydn/rclone:dev .
+$ docker run --rm \
+  -v ~/.config/rclone/rclone.conf:/root/.config/rclone/rclone.conf:ro \
+  jdrydn/rclone:dev \
+  rclone config
 ```
 
 ## Use Cases
