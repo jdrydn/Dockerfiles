@@ -19,11 +19,11 @@ if [ "${GITHUB_TOKEN}" == "**MISSING**" ]; then
   throw_err 1 "You need to set the GITHUB_TOKEN environment variable"
 fi
 
-export RCLONE_CONFIG_S3_TYPE=${RCLONE_CONFIG_S3_TYPE:-'s3'}
-export RCLONE_CONFIG_S3_PROVIDER=${RCLONE_CONFIG_S3_PROVIDER:-'AWS'}
-export RCLONE_CONFIG_S3_ENV_AUTH=${RCLONE_CONFIG_S3_ENV_AUTH:-'true'}
-export RCLONE_CONFIG_S3_ACL=${RCLONE_CONFIG_S3_ACL:-'private'}
-export S3_FILENAME=$(date +"${S3_FILENAME:-'%Y%m%dT%H%M%SZ'}")
+export RCLONE_CONFIG_S3_TYPE=${RCLONE_CONFIG_S3_TYPE:-"s3"}
+export RCLONE_CONFIG_S3_PROVIDER=${RCLONE_CONFIG_S3_PROVIDER:-"AWS"}
+export RCLONE_CONFIG_S3_ENV_AUTH=${RCLONE_CONFIG_S3_ENV_AUTH:-"true"}
+export RCLONE_CONFIG_S3_ACL=${RCLONE_CONFIG_S3_ACL:-"private"}
+export S3_FILENAME=$(date +${S3_FILENAME:-"%Y%m%dT%H%M%SZ"})
 
 for REPO in $@; do
   GITHUB_URL="https://${GITHUB_TOKEN}@api.github.com/repos/$REPO/tarball"
