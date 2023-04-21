@@ -1,5 +1,6 @@
 FROM alpine:latest
-MAINTAINER jdrydn <james@jdrydn.com> (https://jdrydn.com)
+LABEL org.opencontainers.image.url https://github.com/someimportantcompany/Dockerfiles/tree/master/rclone
+LABEL org.opencontainers.image.source https://github.com/someimportantcompany/Dockerfiles
 
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh

@@ -10,9 +10,9 @@ apk update
 # mysqldump
 apk add mysql-client
 # aws-cli
-apk add python py-pip
+apk add python3 py3-pip
 pip install awscli
-apk del py-pip
+apk del py3-pip
 
 # Cleanup
 rm -rf /var/cache/apk/*

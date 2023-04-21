@@ -1,7 +1,6 @@
-# https://github.com/jdrydn/Dockerfiles/tree/master/mysqldump-to-s3
-# https://github.com/schickling/dockerfiles/blob/master/mysql-backup-s3/Dockerfile
 FROM alpine:latest
-MAINTAINER jdrydn <james@jdrydn.com> (https://jdrydn.com)
+LABEL org.opencontainers.image.url https://github.com/someimportantcompany/Dockerfiles/tree/master/mysqldump-to-s3
+LABEL org.opencontainers.image.source https://github.com/someimportantcompany/Dockerfiles
 
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh

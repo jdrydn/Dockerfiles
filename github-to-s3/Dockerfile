@@ -1,5 +1,6 @@
 FROM rclone/rclone:latest
-MAINTAINER jdrydn <james@jdrydn.com> (https://jdrydn.com)
+LABEL org.opencontainers.image.url https://github.com/someimportantcompany/Dockerfiles/tree/master/github-to-s3
+LABEL org.opencontainers.image.source https://github.com/someimportantcompany/Dockerfiles
 
 ENV GITHUB_TOKEN **MISSING**
 ENV S3_BUCKET **MISSING**
