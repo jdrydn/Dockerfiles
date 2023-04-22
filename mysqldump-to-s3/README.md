@@ -8,6 +8,8 @@
 
 ```sh
 $ docker pull jdrydn/mysqldump-to-s3:latest
+# OR: docker pull ghcr.io/someimportantcompany/mysqldump-to-s3:latest
+# OR: docker pull public.ecr.aws/someimportantcompany/mysqldump-to-s3:latest
 $ docker run \
   -e S3_BUCKET=project-backups \
   -e MYSQL_HOST=project.3927e3a82872.us-east-1.rds.amazonaws.com \

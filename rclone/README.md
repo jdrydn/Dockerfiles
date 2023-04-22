@@ -6,6 +6,8 @@
 
 ```sh
 $ docker pull jdrydn/rclone:latest
+# OR: docker pull ghcr.io/someimportantcompany/rclone:latest
+# OR: docker pull public.ecr.aws/someimportantcompany/rclone:latest
 $ docker run --rm jdrydn/rclone:latest \
   rclone --config rclone.conf sync one:// two://
 ```

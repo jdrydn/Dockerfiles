@@ -7,6 +7,8 @@
 
 ```sh
 $ docker pull jdrydn/github-to-s3:latest
+# OR: docker pull ghcr.io/someimportantcompany/github-to-s3:latest
+# OR: docker pull public.ecr.aws/someimportantcompany/github-to-s3:latest
 $ docker run \
   -e GITHUB_TOKEN=your-github-token \
   -e S3_BUCKET=project-backups \
